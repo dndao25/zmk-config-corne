@@ -1,5 +1,4 @@
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
@@ -57,15 +56,6 @@
         };
     };
 
-    macros {
-        f12click: f12click {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp F12 &mkp MB1 &kp F12>;
-            label = "F12CLICK";
-        };
-    };
-
     combos {
         compatible = "zmk,combos";
 
@@ -80,13 +70,13 @@
         };
 
         copy {
-            bindings = <&kp K_COPY>;
-            key-positions = <28 27>;
+            bindings = <&kp LG(C)>;
+            key-positions = <27 14>;
         };
 
         paste {
-            bindings = <&kp K_PASTE>;
-            key-positions = <26 27>;
+            bindings = <&kp LG(V)>;
+            key-positions = <28 14>;
         };
 
         star {
@@ -124,14 +114,34 @@
             key-positions = <33 32>;
         };
 
-        para-less {
-            bindings = <&paraless>;
-            key-positions = <20 19>;
+        ctrlz {
+            bindings = <&kp LG(Z)>;
+            key-positions = <25 14>;
         };
 
-        para-great {
-            bindings = <&paragreat>;
+        all {
+            bindings = <&kp LG(A)>;
+            key-positions = <14 13>;
+        };
+
+        leftnumber {
+            bindings = <&mo 1>;
+            key-positions = <14 15>;
+        };
+
+        rightnumb {
+            bindings = <&mo 2>;
             key-positions = <20 21>;
+        };
+
+        scrollup {
+            bindings = <&msc SCRL_UP>;
+            key-positions = <17 5>;
+        };
+
+        scrolldown {
+            bindings = <&msc SCRL_DOWN>;
+            key-positions = <17 29>;
         };
     };
 
@@ -150,36 +160,55 @@
             // | GUI | CTRL | SHFT | LWR | SPC |   | ENT | RSE  | BKSP | ALT | ESC |
 
             bindings = <
-&kp TAB         &kp Q  &kp W  &kp E           &kp R   &kp T        &kp Y   &kp U   &kp I         &kp O    &kp P     &kp BACKSPACE
-&studio_unlock  &kp A  &kp S  &kp D           &kp F   &kp G        &kp H   &kp J   &kp K         &kp L    &kp SEMI  &kp RET
-&kp LCTRL       &kp Z  &kp X  &kp C           &kp V   &kp B        &kp N   &kp M   &kp COMMA     &kp DOT  &kp FSLH  &kp SQT
-                              &kp LEFT_SHIFT  &tog 2  &kp SPACE    &trans  &tog 2  &kp LEFT_ALT
+&kp ESCAPE  &kp Q  &kp W  &kp E             &kp R             &kp T        &kp Y      &kp U          &kp I         &kp O    &kp P     &kp BACKSPACE
+&kp TAB     &kp A  &kp S  &kp D             &hm LEFT_SHIFT F  &kp G        &kp H      &kp J          &kp K         &kp L    &kp SEMI  &kp RET
+&kp LCTRL   &kp Z  &kp X  &kp C             &kp V             &kp B        &kp N      &kp M          &kp COMMA     &kp DOT  &kp FSLH  &kp SQT
+                          &kp LC(LEFT_GUI)  &mkp MB1          &kp SPACE    &kp ENTER  &kp BACKSPACE  &kp LEFT_ALT
             >;
         };
 
-        NAV {
-            display-name = "NavNum";
-
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-            // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-            // | GUI | CTRL | SHFT | LWR | SPC |   | ENT | RSE  | BKSP | ALT | ESC |
-
+        leftnum {
             bindings = <
-&trans      &kp N1  &kp N2    &kp N3        &kp N4           &kp N5           &kp N6   &kp N7  &kp N8  &kp N9  &kp N0  &studio_unlock
-&bt BT_NXT  &trans  &trans    &kp UP_ARROW  &trans           &kp PAGE_UP      &kp N0   &kp N4  &kp N5  &kp N6  &trans  &trans
-&bt BT_PRV  &trans  &kp LEFT  &kp DOWN      &kp RIGHT_ARROW  &kp PAGE_DOWN    &trans   &kp N1  &kp N2  &kp N3  &trans  &to 0
-                              &kp LGUI      &trans           &kp SPACE        &kp RET  &trans  &trans
+&kp LS(TILDE)  &kp LS(EXCL)  &kp LS(AT)  &kp LS(POUND)  &kp LS(DLLR)  &kp LS(PRCNT)    &trans  &trans  &trans  &trans  &trans  &trans
+&kp GRAVE      &kp N1        &kp N2      &kp N3         &kp N4        &kp N5           &trans  &trans  &trans  &trans  &trans  &trans
+&trans         &trans        &trans      &trans         &trans        &trans           &trans  &trans  &trans  &trans  &trans  &trans
+                                         &trans         &trans        &trans           &trans  &trans  &trans
             >;
         };
 
-        layer_2 {
+        rightnum {
             bindings = <
-&kp END       &kp HOME   &kp F4          &kp UP_ARROW    &kp DEL      &kp BACKSPACE    &kp GRAVE       &kp N7        &kp N8        &kp N9        &kp DEL    &kp BACKSPACE
-&kp ENTER     &kp LC(A)  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT    &kp F12          &kp F7          &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp F11    &kp ENTER
-&kp LEFT_GUI  &kp LC(Z)  &kp LC(T)       &kp K_COPY      &kp K_PASTE  &mkp MB3         &kp F8          &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &f12click  &to 1
-                                         &mkp MB1        &trans       &mkp MB2         &kp LEFT_SHIFT  &trans        &kp N0
+&trans  &trans  &trans  &trans  &trans  &trans    &kp LS(CARET)  &kp LS(AMPS)  &kp LS(STAR)  &kp LS(LPAR)  &kp LS(RPAR)  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &kp N6         &kp N7        &kp N8        &kp N9        &kp N0        &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans         &trans        &trans        &trans        &trans        &trans
+                        &trans  &trans  &trans    &trans         &trans        &trans
+            >;
+        };
+
+        device {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans  &trans
+            >;
+        };
+
+        numbpad {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans  &trans
+            >;
+        };
+
+        dirc {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans  &trans
             >;
         };
     };
@@ -188,8 +217,8 @@
         compatible = "zmk,conditional-layers";
 
         l3 {
-            if-layers = <1 2>;
-            then-layer = <2>;
+            if-layers = <1 1>;
+            then-layer = <1>;
         };
     };
 };
